@@ -1,1 +1,1 @@
-add_lunch_combo lineage_gts3llte-userdebug
+add_lunch_combo lineage_gts3lwifi-userdebug

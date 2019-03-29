@@ -1,4 +1,4 @@
-Device configuration for the Samsung Galaxy Tab S3 LTE
+Device configuration for the Samsung Galaxy Tab S3 WIFI
 
 Copyright (C) 2017 The LineageOS Project
 Copyright (C) 2018 Valera Chigir <valera1978@tut.by>
@@ -13,18 +13,18 @@ Copyright (C) 2018 Valera Chigir <valera1978@tut.by>
 
 * Description
 
-  This repository is for LineageOS on Samsung Galaxy Tab S3 LTE (gts3llte)
+  This repository is for LineageOS on Samsung Galaxy Tab S3 WIFI (gts3lwifi)
 
-* How To Build LineageOS for Samsung Galaxy Tab S3 LTE
+* How To Build LineageOS for Samsung Galaxy Tab S3 WIFI
 
   - Make a workspace
 
-mkdir cm15
-cd cm15
+mkdir cm16
+cd cm16
 
   - Do repo init & sync
 
-repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
+repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -32,9 +32,9 @@ repo init -u git://github.com/LineageOS/android.git -b lineage-15.1
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-  <project name="Valera1978/android_device_samsung_gts3llte" path="device/samsung/gts3llte" remote="github" />
+  <project name="Valera1978/android_device_samsung_gts3lwifi" path="device/samsung/gts3lwifi" remote="github" />
   <project name="Valera1978/android_kernel_samsung_msm8996" path="kernel/samsung/msm8996" remote="github" />
-  <project name="Valera1978/android_vendor_samsung_gts3llte" path="vendor/samsung/gts3llte" remote="github" />
+  <project name="Valera1978/android_vendor_samsung_gts3lwifi" path="vendor/samsung/gts3lwifi" remote="github" />
   <project name="LineageOS/android_hardware_samsung" path="hardware/samsung" remote="github" />
 
 </manifest>
@@ -56,6 +56,6 @@ repo sync
 
 . build/envsetup.sh
 
-  - Build lineage 15.1
+  - Build lineage 16.0
 
-brunch gts3llte
+brunch gts3lwifi

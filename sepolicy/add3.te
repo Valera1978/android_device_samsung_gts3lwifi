@@ -19,14 +19,8 @@ allow vndservicemanager shell:file { open read };
 allow vndservicemanager shell:process getattr;
 allow vndservicemanager shell:binder transfer;
 
-#============= gallery_app ==============
-allow gallery_app vendor_camera_prop:file { getattr open read };
-
 #============= hal_memtrack_default ==============
 allow hal_memtrack_default debugfs:file { getattr open read };
-
-#============= snap_app ==============
-allow snap_app vendor_camera_prop:file { getattr open };
 
 #============= tee ==============
 allow tee gatekeeper_data_file:dir { add_name open write };

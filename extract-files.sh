@@ -18,7 +18,7 @@
 
 set -e
 
-DEVICE=gts3llte
+DEVICE=gts3lwifi
 VENDOR=samsung
 SRC=~/system
 # Load extract_utils and do some sanity checks

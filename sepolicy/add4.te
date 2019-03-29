@@ -12,11 +12,5 @@ allow qti_init_shell system_prop:property_service set;
 allow hal_gnss_qti qmuxd_socket:dir { add_name remove_name };
 allow hal_gnss_qti qmuxd_socket:sock_file { create unlink };
 
-#============= snap_app ==============
-allow snap_app vendor_camera_prop:file read;
-
-#============= snap_app ==============
-allow snap_app vendor_camera_prop:file read;
-
 #============= tee ==============
 allow tee gatekeeper_data_file:file { create write };

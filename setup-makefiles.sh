@@ -18,7 +18,7 @@
 
 set -e
 
-DEVICE=gts3llte
+DEVICE=gts3lwifi
 VENDOR=samsung
 
 INITIAL_COPYRIGHT_YEAR=2018
@@ -40,7 +40,7 @@ fi
 setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false
 
 # Copyright headers and guards
-write_headers "gts3llte"
+write_headers "gts3lwifi"
 
 write_makefiles "$MY_DIR"/proprietary-files.txt
 

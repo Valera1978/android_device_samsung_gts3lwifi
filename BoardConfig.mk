@@ -17,12 +17,12 @@
 
 BOARD_VENDOR := samsung
 
-DEVICE_PATH := device/samsung/gts3llte
+DEVICE_PATH := device/samsung/gts3lwifi
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := gts3llte
+TARGET_OTA_ASSERT_DEVICE := gts3lwifi
 
 # ADB Legacy Interface
 TARGET_USES_LEGACY_ADB_INTERFACE := true
@@ -57,7 +57,7 @@ TARGET_KERNEL_SOURCE := kernel/samsung/msm8996
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := lineage_gts3llte_defconfig
+TARGET_KERNEL_CONFIG := lineage_gts3lwifi_defconfig
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 #SELINUX_IGNORE_NEVERALLOWS := true
@@ -219,12 +219,10 @@ TARGET_USERIMAGES_USE_F2FS := true
 #PRODUCT_FULL_TREBLE_OVERRIDE := true
 #PRODUCT_VENDOR_MOVE_ENABLED := true
 
-# RIL
-PROTOBUF_SUPPORTED := true
-TARGET_RIL_VARIANT := caf
-
 # Security patch level - T825XXU2BRL2
 VENDOR_SECURITY_PATCH := 2018-12-01
+
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
@@ -247,4 +245,4 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # inherit from the proprietary version
--include vendor/samsung/gts3llte/BoardConfigVendor.mk
+-include vendor/samsung/gts3lwifi/BoardConfigVendor.mk

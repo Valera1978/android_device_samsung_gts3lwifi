@@ -1,0 +1,9 @@
+#============= hal_bluetooth_qti ==============
+allow hal_bluetooth_qti bluetooth_data_file:dir { write add_name };
+
+#============= init ==============
+allow init proc:file { read getattr };
+
+#============= system_app ==============
+allow system_app perfprofd:binder call;
+allow system_app wificond:binder call;

@@ -85,10 +85,6 @@ sdm.perf_hint_window=50
 ro.sf.lcd_density=320
 lockscreen.rot_override=true
 
-# IMS
-persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=1
-
 # Media
 vendor.vidc.enc.disable.pq=true
 vidc.enc.dcvs.extra-buff-count=2
@@ -101,43 +97,10 @@ ro.vendor.extension_library=libqti-perfd-client.so
 ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # Radio
-persist.data.netmgrd.qos.enable=true
-persist.data.qmi.adb_logmask=0
-persist.radio.add_power_save=1
-rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
-ro.telephony.mms_data_profile=5
-ro.ril.telephony.data_reg_resp_strings=7
-ro.ril.telephony.oper_resp_strings=4
-ro.ril.telephony.qan_resp_strings=6
+ro.radio.noril=yes
 
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
-ro.telephony.call_ring.multiple=0
-
-DEVICE_PROVISIONED=1
-ril.subscription.types=NV,RUIM
-ro.telephony.call_ring.multiple=false
-ro.telephony.default_cdma_sub=0
-ro.telephony.default_network=20,20
-#persist.data.qmi.adb_logmask=0
-persist.net.doxlat=true
-persist.radio.apm_sim_not_pwdn=1
-persist.radio.force_on_dc=true
-#persist.radio.multisim.config=dsds
-persist.radio.redir_party_num=1
-persist.vendor.radio.custom_ecc=1
-persist.vendor.radio.rat_on=combine
-persist.vendor.radio.sib16_support=1
-
-# RmNet Data
-persist.rmnet.data.enable=true
-persist.data.wda.enable=true
-persist.data.df.dl_mode=5
-persist.data.df.ul_mode=5
-persist.data.df.agg.dl_pkt=10
-persist.data.df.agg.dl_size=4096
-persist.data.df.mux_count=8
-persist.data.df.iwlan_mux=9
-persist.data.df.dev_name=rmnet_usb0
+# WIFI model
+ro.carrier=wifi-only
 
 # TimeService
 persist.timed.enable=true
