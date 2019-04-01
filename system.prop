@@ -61,10 +61,6 @@ ro.qcom.ad=1
 # DRM
 drm.service.enabled=true
 
-# FRP
-ro.hardware.keystore=mdfpp
-ro.hardware.gatekeeper=mdfpp
-
 #property to enable fingerprint
 persist.qfp=false
 
