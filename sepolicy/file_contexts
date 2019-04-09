@@ -37,7 +37,7 @@
 
 /vendor/bin/factory.adsp     u:object_r:wifiloader_exec:s0
 
-/system/vendor/bin/hw/vendor\.samsung\.hardware\.biometrics\.fingerprint@2\.1-service u:object_r:hal_fingerprint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.biometrics\.fingerprint@2\.1-service u:object_r:hal_fingerprint_default_exec:s0
 
 /dev/block/mmcblk0p27                   u:object_r:e2fsck_device:s0
 

@@ -25,9 +25,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.power.rc
-import init.qcom.usb.rc
-import init.samsung.rc
+import /vendor/etc/init/hw/init.qcom.power.rc
+import /vendor/etc/init/hw/init.qcom.usb.rc
+import /vendor/etc/init/hw/init.samsung.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -75,6 +75,9 @@ on late-fs
     write /sys/block/sda/queue/nr_requests 256
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
+
+on post-fs
+    start vendor.qseecomd
 
 on post-fs-data
     mkdir /data/vendor/misc 01771 system system
@@ -249,19 +252,13 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
-    mkdir /persist/bluetooth 0770 bluetooth bluetooth
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
-    mkdir /persist/time 0770 system system
-    mkdir /persist/data 0700 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/qc_senseid 0700 system system
-    mkdir /persist/bms 0700 root system
-    mkdir /persist/wlan_bt 0700 system system
+    mkdir /persist/wlan_bt 0770 system system
     mkdir /persist/audio 0777 media audio
-    mkdir /persist/display 0770 system graphics
-    restorecon_recursive /persist
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -449,11 +446,6 @@ service loc_launcher /vendor/bin/loc_launcher
     group gps
     writepid /dev/cpuset/system-background/tasks
 
-service qcom-sh /vendor/bin/init.qcom.sh
-    class late_start
-    user root
-    oneshot
-
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
 
@@ -467,7 +459,7 @@ on property:ro.data.large_tcp_window_size=true
 #    group radio cache inet misc audio log readproc wakelock
 #    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
@@ -487,24 +479,24 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     writepid /dev/cpuset/system-background/tasks
 
 # Start up peripheral manager
-service per_mgr /vendor/bin/pm-service
+service vendor.per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service per_proxy /vendor/bin/pm-proxy
+service vendor.per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-on property:init.svc.per_mgr=running
-    start per_proxy
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
 
 on property:sys.shutdown.requested=*
-    stop per_proxy
+    stop vendor.per_proxy
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine-8996.conf}
     class main

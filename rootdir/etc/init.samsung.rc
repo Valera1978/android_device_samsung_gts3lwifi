@@ -277,6 +277,6 @@ on boot
 #Meta event
     chown system radio /sys/class/sensors/sensor_dev/flush
 
-service wifiloader /system/bin/wifiloader
+service wifiloader /vendor/bin/wifiloader
     class main
     oneshot

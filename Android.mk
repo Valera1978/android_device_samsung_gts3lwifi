@@ -32,7 +32,7 @@ MODEM_IMAGES := \
     modem.b06 modem.b07 modem.b08 modem.b10 modem.b11 \
     modem.b12 modem.b13 modem.b14 modem.mdt
 
-MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(MODEM_IMAGES)))
+MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(MODEM_IMAGES)))
 $(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "MODEM firmware link: $@"
 	@mkdir -p $(dir $@)
@@ -42,7 +42,7 @@ $(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
 
 IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
-IMS_SYMLINKS := $(addprefix $(TARGET_OUT_APPS)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
+IMS_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/app/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
 $(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "IMS lib link: $@"
 	@mkdir -p $(dir $@)
@@ -68,7 +68,7 @@ $(WCNSS_MAC_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_INI_SYMLINK) $(WCNSS_MAC_SYMLINK)
 
 # Create links for audcal data files
-$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9320; \
+$(shell mkdir -p $(TARGET_OUT_VENDOR)/etc/firmware/wcd9320; \
 	ln -sf /data/misc/audio/wcd9320_anc.bin \
 		$(TARGET_OUT)/etc/firmware/wcd9320/wcd9320_anc.bin;\
 	ln -sf /data/misc/audio/mbhc.bin \
