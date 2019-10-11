@@ -15,3 +15,6 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_gts3lwifi.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_gts3lwifi-userdebug

@@ -83,7 +83,7 @@ void MsgTask::sendMsg(const LocMsg* msg) const {
 
 void MsgTask::prerun() {
     // make sure we do not run in background scheduling group
-     set_sched_policy(gettid(), SP_FOREGROUND);
+//     set_sched_policy(gettid(), SP_FOREGROUND);
 }
 
 bool MsgTask::run() {

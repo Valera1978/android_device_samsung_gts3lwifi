@@ -29,18 +29,23 @@
 /dev/mobicore                u:object_r:tee_device:s0
 /dev/mobicore-user           u:object_r:tee_device:s0
 
+/sys/class/power_supply/battery/batt_update_data     u:object_r:rootfs:s0
+
+#/sys/devices/soc/7464900.sdhci/clkscale_enable       u:object_r:sysfs_scsi_host:s0
+#/sys/kernel/tracing/tracing_on               u:object_r:debugfs_trace_marker:s0
+#/sys/block/mmcblk0/queue/scheduler
+
 # sysfs
 /sys/devices/virtual/camera(/.*)?                                u:object_r:sysfs_camera:s0
 /sys/devices/virtual/sec/sec_key/hall_irq_ctrl                   u:object_r:sysfs_sec:s0
 
-/system/bin/wifiloader       u:object_r:wifiloader_exec:s0
-
-/vendor/bin/factory.adsp     u:object_r:wifiloader_exec:s0
-
-/system/vendor/bin/hw/vendor\.samsung\.hardware\.biometrics\.fingerprint@2\.1-service u:object_r:hal_fingerprint_default_exec:s0
-
-/dev/block/mmcblk0p27                   u:object_r:e2fsck_device:s0
-
 # HALs
-/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey         u:object_r:hal_drm_clearkey_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.widevine         u:object_r:hal_drm_widevine_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service\.clearkey         u:object_r:hal_drm_clearkey_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service\.widevine         u:object_r:hal_drm_widevine_exec:s0
+
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service\.samsung-qcom    u:object_r:hal_lineage_livedisplay_sysfs_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service.samsung                     u:object_r:hal_lineage_touch_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.biometrics\.fingerprint@2\.1-service u:object_r:hal_fingerprint_default_exec:s0
+
+/system/bin/wifiloader                         u:object_r:wifiloader_exec:s0
+/(vendor|system/vendor)/bin/wifiloader         u:object_r:wifiloader_exec:s0

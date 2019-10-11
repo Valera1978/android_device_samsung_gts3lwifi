@@ -24,6 +24,12 @@
 
 #define BTM_DEF_LOCAL_NAME   "Samsung Galaxy Tab S3"
 #define BLUETOOTH_QTI_SW TRUE
+#define MAX_ACL_CONNECTIONS   16
+#define MAX_L2CAP_CHANNELS    16
 #define BLE_VND_INCLUDED   TRUE
+#define BT_CLEAN_TURN_ON_DISABLED 1
+
+/* Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec */
+#define AVDT_NUM_SEPS 12
 
 #endif

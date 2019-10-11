@@ -15,6 +15,9 @@
 # limitations under the License.
 #
 
+# temporary
+BUILD_BROKEN_DUP_RULES := true
+
 BOARD_VENDOR := samsung
 
 DEVICE_PATH := device/samsung/gts3lwifi
@@ -49,6 +52,7 @@ TARGET_NO_BOOTLOADER := true
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7464900.sdhci lpm_levels.sleep_disabled=1 rcupdate.rcu_expedited=1 cma=32M@0-0xffffffff
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
@@ -56,18 +60,14 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02200000 -
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8996
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_CONFIG := lineage_gts3lwifi_defconfig
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
-#SELINUX_IGNORE_NEVERALLOWS := true
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8996
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno530
-
-# Properties
-#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -95,8 +95,11 @@ AUDIO_FEATURE_ENABLED_PCM_OFFLOAD_24 := true
 #AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 #BOARD_SUPPORTS_SOUND_TRIGGER := true
-#BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_ALSA_AUDIO := true
 #USE_CUSTOM_AUDIO_POLICY := 1
+
+USE_XML_AUDIO_POLICY_CONF := 1
+TARGET_USES_AOSP_FOR_AUDIO := true
 
 # Bionic
 TARGET_NEEDS_LEGACY_MUTEX_HANDLE := true
@@ -104,18 +107,8 @@ TARGET_NEEDS_LEGACY_MUTEX_HANDLE := true
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAS_QCA_BT_ROME := true
-BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_BTNV := true
-BOARD_BLUETOOTH_BDROID_HCILP_INCLUDED := false
-
-# CAF HALs
-TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
-TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
-
-PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom/display-$(TARGET_QCOM_DISPLAY_VARIANT) \
-    hardware/qcom/media-$(TARGET_QCOM_MEDIA_VARIANT)
 
 # Camera
 USE_CAMERA_STUB := true
@@ -165,6 +158,9 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/configs/vendor_fram
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/compatibility_matrix.xml
 
+# LineageHW
+BOARD_HARDWARE_CLASS += hardware/lineage/lineagehw
+
 # Lineage Hardware
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
 
@@ -183,13 +179,6 @@ TARGET_USES_MKE2FS := true
 # Fingerprint
 TARGET_SEC_FP_HAL_VARIANT := bauth
 
-TARGET_LD_SHIM_LIBS := \
-	/system/vendor/lib/libbauthserver.so|/vendor/lib/libbauthtzcommon_shim.so \
-	/system/vendor/lib64/libbauthserver.so|/vendor/lib64/libbauthtzcommon_shim.so
-
-TARGET_LD_SHIM_LIBS += \
-   /system/vendor/lib/hw/camera.msm8996.so|/system/vendor/lib/libshims_cameraclient.so
-
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
@@ -202,13 +191,11 @@ TARGET_USES_INTERACTION_BOOST := true
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
-#TARGET_USE_SDCLANG := true
 
 # Ramdisk
-BOARD_ROOT_EXTRA_FOLDERS := dsp efs firmware firmware-modem persist
+BOARD_ROOT_EXTRA_FOLDERS := efs firmware firmware-modem persist
 BOARD_ROOT_EXTRA_SYMLINKS := /system/etc/firmware/btfw32.tlv:/bt_firmware/image/btfw32.tlv
 BOARD_ROOT_EXTRA_SYMLINKS += /system/etc/firmware/btnv32.bin:/bt_firmware/image/btnv32.bin
-BOARD_ROOT_EXTRA_SYMLINKS += /data/tombstones:/tombstones
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
@@ -219,14 +206,19 @@ TARGET_USERIMAGES_USE_F2FS := true
 #PRODUCT_FULL_TREBLE_OVERRIDE := true
 #PRODUCT_VENDOR_MOVE_ENABLED := true
 
-# Security patch level - T825XXU2BRL2
-VENDOR_SECURITY_PATCH := 2018-12-01
+# Properties
+#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+# Security patch level - T820XXU3CSH9
+VENDOR_SECURITY_PATCH := 2019-08-01
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+
+include $(DEVICE_PATH)/sepolicy_tmp/sepolicy.mk
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true

@@ -1,9 +1,58 @@
 #============= hal_bluetooth_qti ==============
 allow hal_bluetooth_qti bluetooth_data_file:dir { write add_name };
+allow hal_bluetooth_qti bluetooth_data_file:file { create open read write };
 
 #============= init ==============
 allow init proc:file { read getattr };
+allow init rootfs:file execute_no_trans;
+allow init vendor_toolbox_exec:file execute_no_trans;
+allow init hal_lineage_touch_hwservice:hwservice_manager add;
 
 #============= system_app ==============
 allow system_app perfprofd:binder call;
 allow system_app wificond:binder call;
+
+#============= system_server ==============
+allow system_server init:binder call;
+
+#============= hwservicemanager ==============
+allow hwservicemanager init:binder call;
+allow hwservicemanager init:file open;
+allow hwservicemanager init:process getattr;
+
+#============= untrusted_app ==============
+allow untrusted_app selinuxfs:file open;
+
+#============= untrusted_app_27 ==============
+allow untrusted_app_27 apk_data_file:file setattr;
+allow untrusted_app_27 proc:file open;
+allow untrusted_app_27 proc:file getattr;
+
+#============= cameraserver ==============
+allow cameraserver sysfs_graphics:file read;
+
+#============= mm-qcamerad ==============
+allow mm-qcamerad camera_data_file:dir write;
+
+#============= system_app ==============
+allow system_app init:binder call;
+
+#============= keystore ==============
+allow keystore vendor_tee_listener_prop:file { read open getattr };
+
+#============= hal_fingerprint_default ==============
+allow hal_fingerprint_default vendor_data_file:dir { read write open add_name create remove_name rmdir };
+allow hal_fingerprint_default vendor_data_file:file { read write open create getattr rename unlink };
+
+#============= tee ==============
+allow tee vendor_default_prop:property_service set;
+
+#============= netutils_wrapper ==============
+allow netutils_wrapper netmgrd:socket { read write };
+
+
+#============= hal_lineage_touch_default ==============
+allow hal_lineage_touch_default sysfs:file read;
+
+#============= system_server ==============
+allow system_server mnt_vendor_file:dir getattr;

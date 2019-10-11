@@ -40,13 +40,16 @@ ro.qualcomm.bluetooth.hfp=false
 ro.qualcomm.bluetooth.pbap=true
 ro.qualcomm.bluetooth.map=true
 
-
 # Camera
 persist.camera.gyro.disable=0
-persist.camera.imglib.fddsp=1
+persist.camera.imglib.fddsp=0
 
 # CNE
-persist.vendor.cne.feature=1
+#persist.vendor.cne.feature=0
+
+# Keystore Gatekeeper
+ro.hardware.keystore=mdfpp
+ro.hardware.gatekeeper=mdfpp
 
 # Data modules
 persist.data.iwlan.enable=true
@@ -81,6 +84,12 @@ sdm.perf_hint_window=50
 ro.sf.lcd_density=320
 lockscreen.rot_override=true
 
+# Surfaceflinger
+debug.sf.early_phase_offset_ns=1500000
+debug.sf.early_app_phase_offset_ns=1500000
+debug.sf.early_gl_phase_offset_ns=3000000
+debug.sf.early_gl_app_phase_offset_ns=15000000
+
 # Media
 vendor.vidc.enc.disable.pq=true
 vidc.enc.dcvs.extra-buff-count=2
@@ -100,6 +109,11 @@ ro.carrier=wifi-only
 
 # TimeService
 persist.timed.enable=true
+
+# USB
+sys.usb.controller=6a00000.dwc3
+sys.usb.rndis.func.name=rndis_bam
+sys.usb.rmnet.func.name=rmnet_bam
 
 # Wifi
 wifi.interface=wlan0

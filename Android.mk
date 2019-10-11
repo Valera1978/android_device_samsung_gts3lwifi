@@ -41,16 +41,6 @@ $(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
 
-IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
-IMS_SYMLINKS := $(addprefix $(TARGET_OUT_APPS)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
-$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "IMS lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /system/lib64/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
-
 WCNSS_INI_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 $(WCNSS_INI_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@echo "WCNSS config ini link: $@"
@@ -179,6 +169,15 @@ $(AUTHHAT_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(AUTHHAT_SYMLINKS)
 
+AUTHHAT_SYMLINKS1 := $(addprefix $(TARGET_OUT_VENDOR)/firmware_mnt/image/,$(notdir $(AUTHHAT_IMAGES)))
+$(AUTHHAT_SYMLINKS1): $(LOCAL_INSTALLED_MODULE)
+	@echo "AUTHHAT firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(AUTHHAT_SYMLINKS1)
+
 BDWLAN_IMAGES := \
     bdwlan30.b01 bdwlan30.b02 bdwlan30.b03 bdwlan30.b04 bdwlan30.b05 bdwlan30.b06 bdwlan30.b07 \
     bdwlan30.b08 bdwlan30.b09 bdwlan30.b0a bdwlan30.b0b bdwlan30.b0c bdwlan30.b0d bdwlan30.b0e \
@@ -192,6 +191,15 @@ $(BDWLAN_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BDWLAN_SYMLINKS)
+
+BDWLAN_SYMLINKS1 := $(addprefix $(TARGET_OUT_VENDOR)/firmware_mnt/image/,$(notdir $(BDWLAN_IMAGES)))
+$(BDWLAN_SYMLINKS1): $(LOCAL_INSTALLED_MODULE)
+	@echo "BDWLAN firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(BDWLAN_SYMLINKS1)
 
 CPE_IMAGES := \
     cpe_9335.b08 cpe_9335.b09 cpe_9335.b11 cpe_9335.b14 cpe_9335.b16 \
@@ -264,6 +272,15 @@ $(ADD_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(ADD_SYMLINKS)
 
+ADD_SYMLINKS1 := $(addprefix $(TARGET_OUT_VENDOR)/firmware_mnt/image/,$(notdir $(ADD_IMAGES)))
+$(ADD_SYMLINKS1): $(LOCAL_INSTALLED_MODULE)
+	@echo "Additional firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(ADD_SYMLINKS1)
+
 FINGERPR_IMAGES := fingerpr.b00 fingerpr.b01 fingerpr.b02 fingerpr.b03 fingerpr.b04 fingerpr.b05 fingerpr.b06 fingerpr.mdt
 
 FINGERPR_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(FINGERPR_IMAGES)))
@@ -274,6 +291,15 @@ $(FINGERPR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FINGERPR_SYMLINKS)
+
+FINGERPR_SYMLINKS1 := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(FINGERPR_IMAGES)))
+$(FINGERPR_SYMLINKS1): $(LOCAL_INSTALLED_MODULE)
+	@echo "FINGERPR firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(FINGERPR_SYMLINKS1)
 
 GPSTEST_IMAGES := gptest.b00 gptest.b01 gptest.b02 gptest.b03 gptest.b04 gptest.b05 gptest.b06 gptest.mdt
 
