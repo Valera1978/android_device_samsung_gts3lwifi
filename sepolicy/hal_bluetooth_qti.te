@@ -1,2 +1,0 @@
-allow hal_bluetooth_qti efs_file:dir search;
-allow hal_bluetooth_qti sysfs:file write;

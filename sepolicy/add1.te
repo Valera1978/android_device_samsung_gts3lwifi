@@ -1,100 +1,23 @@
-#============= rfs_access ==============
-allow rfs_access self:capability dac_override;
+#============= hal_dpmQmiMgr ==============
+allow hal_dpmQmiMgr sysfs:file { open read };
 
-#============= system_app ==============
-allow system_app proc_pagetypeinfo:file { getattr open read };
+#============= hal_graphics_composer_default ==============
+allow hal_graphics_composer_default persist_data_file:dir search;
 
-#============= atfwd ==============
-allow atfwd sysfs:file { open read };
+#============= hal_sensors_default ==============
+allow hal_sensors_default persist_data_file:dir search;
 
-#============= audioserver ==============
-allow audioserver vendor_data_file:dir { add_name write };
-allow audioserver vendor_data_file:file { getattr append create open read };
-
-#============= cameraserver ==============
-allow cameraserver default_prop:property_service set;
-allow cameraserver mm-qcamerad:unix_dgram_socket sendto;
-allow cameraserver sysfs:file { getattr open read };
-
-#============= fsck ==============
-allow fsck block_device:blk_file { open read write };
-allow fsck mnt_vendor_file:dir getattr;
-allow fsck e2fsck_device:blk_file ioctl;
-
-#============= hal_bluetooth_qti ==============
-allow hal_bluetooth_qti default_prop:property_service set;
-
-#============= hal_fingerprint_default ==============
-allow hal_fingerprint_default fingerprintd_data_file:dir write;
-
-#============= hal_gnss_qti ==============
-allow hal_gnss_qti sysfs:file { read open };
-
-#============= hal_health_default ==============
-allow hal_health_default sysfs:file { getattr open read };
-
-#============= hal_perf_default ==============
-allow hal_perf_default default_prop:property_service set;
-allow hal_perf_default self:capability dac_override;
-
-#============= healthd ==============
-allow healthd sysfs:file { getattr open read };
+#============= hwservicemanager ==============
+allow hwservicemanager init:file open;
+allow hwservicemanager init:process getattr;
 
 #============= init ==============
-allow init hal_drm_hwservice:hwservice_manager add;
-allow init proc:file { open write };
-allow init sysfs:file { open setattr write };
-allow init sysfs_boot_adsp:file { open setattr };
-allow init sysfs_cpu_boost:file { open write };
-allow init sysfs_devices_system_cpu:file write;
-allow init sysfs_lowmemorykiller:file { open write };
-allow init sysfs_msm_perf:file setattr;
-allow init sysfs_msm_power:file { open write };
-allow init sysfs_poweron_alarm:file { open write };
-allow init sysfs_slpi:file open;
-allow init sysfs_thermal:file write;
-allow init vendor_file:file execute_no_trans;
-allow init sysfs_devfreq:file { open write };
-allow init vndbinder_device:chr_file read;
-allow init shell_exec:file execute_no_trans;
-allow init sysfs_ea:file setattr;
-allow init sysfs_camera:file setattr;
-allow init sysfs_lib:file setattr;
-allow init sysfs_sensors:lnk_file read;
-allow init sysfs_wlan_fwpath:file setattr;
+allow init default_android_hwservice:hwservice_manager add;
+allow init netmgrd_socket:sock_file write;
+allow init self:netlink_tcpdiag_socket { bind create getopt setopt };
+allow init self:udp_socket ioctl;
 
-#============= netmgrd ==============
-allow netmgrd sysfs:file { open read };
-
-#============= mm-qcamerad ==============
-allow mm-qcamerad vendor_default_prop:property_service set;
-allow mm-qcamerad default_prop:property_service set;
-
-#============= rild ==============
-allow rild system_prop:property_service set;
-
-#============= sensors ==============
-allow sensors sysfs:file { open read };
-
-#============= location ==============
-allow location sysfs:file { open read };
-
-#============= system_server ==============
-allow system_server dalvikcache_data_file:file execute;
-allow system_server sensors_persist_file:dir search;
-allow system_server sensors_persist_file:file { open read };
-allow system_server vendor_camera_prop:file { getattr open read };
-
-#============= tee ==============
-allow tee system_prop:property_service set;
-
-#============= time_daemon ==============
-allow time_daemon sysfs:file { open read };
-allow time_daemon time_data_file:dir { add_name write };
-allow time_daemon time_data_file:file { create open read write };
-
-#============= vold ==============
-allow vold mnt_vendor_file:dir { open read ioctl };
-
-#============= webview_zygote ==============
-allow webview_zygote zygote:unix_dgram_socket write;
+#============= vndservicemanager ==============
+allow vndservicemanager init:dir search;
+allow vndservicemanager init:file { open read };
+allow vndservicemanager init:process getattr;

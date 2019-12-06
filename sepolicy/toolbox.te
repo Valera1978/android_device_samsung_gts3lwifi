@@ -9,5 +9,4 @@ allow toolbox property_socket:sock_file write;
 allow toolbox sensors_prop:property_service set;
 allow toolbox radio_data_file:dir { add_name create getattr open read setattr write };
 allow toolbox self:capability dac_override;
-allow toolbox sensors_persist_file:dir getattr;
 allow toolbox proc:file { open read };

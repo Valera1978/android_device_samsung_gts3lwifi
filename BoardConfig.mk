@@ -209,10 +209,8 @@ VENDOR_SECURITY_PATCH := 2019-08-01
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
-#include device/qcom/sepolicy/sepolicy.mk
-#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
-include $(DEVICE_PATH)/sepolicy_tmp/sepolicy.mk
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true

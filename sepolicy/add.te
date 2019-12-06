@@ -1,2 +1,189 @@
-#============= sensors ==============
-allow sensors efs_file:dir search;
+#============= bluetooth ==============
+allow bluetooth init:binder { call transfer };
+
+#============= cameraserver ==============
+allow cameraserver init:binder call;
+allow cameraserver init:unix_dgram_socket sendto;
+allow cameraserver sysfs:file { getattr open read };
+allow cameraserver vendor_camera_data_file:sock_file write;
+
+#============= fsck ==============
+allow fsck block_device:blk_file { open read write };
+
+#============= hal_fingerprint_default ==============
+allow hal_fingerprint_default fingerprintd_data_file:dir write;
+allow hal_fingerprint_default vendor_data_file:dir { add_name create open read remove_name rmdir write };
+allow hal_fingerprint_default vendor_data_file:file { create getattr open read rename unlink write };
+
+#============= hal_gnss_qti ==============
+allow hal_gnss_qti init:binder { call transfer };
+allow hal_gnss_qti init:unix_dgram_socket sendto;
+allow hal_gnss_qti init:unix_stream_socket connectto;
+allow hal_gnss_qti netmgrd_socket:sock_file write;
+allow hal_gnss_qti self:netlink_generic_socket { bind create };
+allow hal_gnss_qti self:socket { create ioctl read write };
+allow hal_gnss_qti sysfs:file { open read };
+
+#============= hal_graphics_composer_default ==============
+allow hal_graphics_composer_default init:binder call;
+
+#============= hal_health_default ==============
+allow hal_health_default sysfs:file { getattr open read };
+
+#============= hal_power_default ==============
+allow hal_power_default init:binder call;
+
+#============= hal_sensors_default ==============
+allow hal_sensors_default persist_data_file:file { open read };
+allow hal_sensors_default sysfs:file { open read write getattr };
+
+#============= hwservicemanager ==============
+allow hwservicemanager init:binder { call transfer };
+
+#============= init ==============
+allow init audio_device:chr_file { ioctl open read write };
+allow init block_device:blk_file write;
+allow init bluetooth:binder call;
+allow init cameraserver:fd use;
+allow init debugfs_rmt_storage:file write;
+allow init device:chr_file { ioctl open read write };
+allow init dnsproxyd_socket:sock_file write;
+allow init dnsresolver_service:service_manager find;
+allow init graphics_device:chr_file { ioctl open read write };
+allow init hal_alarm_qti_hwservice:hwservice_manager { add find };
+allow init hal_bluetooth_hwservice:hwservice_manager { add find };
+allow init hal_display_color_hwservice:hwservice_manager add;
+allow init hal_display_postproc_hwservice:hwservice_manager add;
+allow init hal_drm_hwservice:hwservice_manager add;
+allow init hal_fm_hwservice:hwservice_manager find;
+allow init hal_iop_hwservice:hwservice_manager { add find };
+allow init hal_perf_hwservice:hwservice_manager add;
+allow init hal_tetheroffload_hwservice:hwservice_manager add;
+allow init hci_attach_dev:chr_file { ioctl open read write };
+allow init ion_device:chr_file { open read };
+allow init ipa_dev:chr_file { ioctl open read write };
+allow init ipa_vendor_data_file:file lock;
+allow init location_data_file:file { ioctl lock };
+allow init location_socket:sock_file write;
+allow init netd:binder call;
+allow init netd_service:service_manager find;
+allow init netutils_wrapper_exec:file { execute execute_no_trans getattr open read };
+allow init persist_data_file:dir mounton;
+allow init persist_data_file:file rename;
+allow init proc:file setattr;
+allow init qdsp_device:chr_file { ioctl open read };
+allow init rmnet_device:chr_file { open read write };
+allow init rtc_device:chr_file { ioctl open read };
+allow init self:binder { call transfer };
+allow init self:capability { net_bind_service sys_module };
+allow init self:capability2 block_suspend;
+allow init self:netlink_generic_socket { bind create read write };
+allow init self:netlink_kobject_uevent_socket { bind create getopt read setopt };
+allow init self:netlink_route_socket { bind create getattr getopt nlmsg_read read setopt write };
+allow init self:netlink_socket { setopt write };
+allow init self:netlink_xfrm_socket { bind create };
+allow init self:rawip_socket { create getopt setopt };
+allow init self:socket { bind connect create ioctl read write };
+allow init self:tcp_socket { read write };
+allow init self:udp_socket { ioctl read write };
+allow init sensors_device:chr_file { ioctl open read };
+allow init ssr_device:chr_file { open read };
+allow init sysfs:file { open read write };
+allow init sysfs_camera:file { open read write };
+allow init sysfs_graphics:file { open read };
+allow init sysfs_kgsl:file { open read };
+allow init sysfs_mpctl:file { open read write };
+allow init sysfs_thermal:file write;
+allow init sysfs_wake_lock:file { append open write };
+allow init system_file:file execute_no_trans;
+allow init system_net_netd_hwservice:hwservice_manager find;
+allow init system_suspend_hwservice:hwservice_manager find;
+allow init tee_device:chr_file { open read };
+allow init uio_device:chr_file { open read write };
+allow init vendor_bt_data_file:file append;
+allow init vendor_file:file execute_no_trans;
+allow init vendor_per_mgr_service:service_manager { add find };
+allow init video_device:chr_file { ioctl open read write };
+allow init vndbinder_device:chr_file { ioctl open read write };
+allow init vndservicemanager:binder { call transfer };
+
+allow init hal_gnss_qti:unix_dgram_socket sendto;
+allow init hal_graphics_allocator_default:fd use;
+allow init rild:binder call;
+allow init rmnet_device:chr_file ioctl;
+allow init self:netlink_generic_socket { getattr setopt };
+allow init self:netlink_route_socket nlmsg_write;
+allow init self:udp_socket ioctl;
+allow init sysfs_net:file { open write };
+
+allow init hal_gnss_qti:binder call;
+allow init self:udp_socket ioctl;
+
+allow init fwmarkd_socket:sock_file write;
+allow init netd:unix_stream_socket connectto;
+allow init self:tcp_socket { getopt setopt };
+allow init self:udp_socket ioctl;
+allow init vendor_data_file:file { ioctl lock };
+
+#============= netd ==============
+allow netd init:tcp_socket { getopt read setopt write };
+
+#============= installd ==============
+allow installd device:file { open write };
+
+#============= location ==============
+allow location init:unix_stream_socket { read write };
+allow location mnt_vendor_file:dir getattr;
+allow location persist_data_file:file { open read };
+allow location self:capability net_bind_service;
+allow location self:socket { bind create ioctl read write };
+allow location sysfs:file { open read };
+
+#============= mediacodec ==============
+allow mediacodec init:binder call;
+
+#============= netd ==============
+allow netd device:file { open write };
+
+#============= rild ==============
+allow rild init:binder { call transfer };
+
+#============= system_app ==============
+allow system_app apex_service:service_manager find;
+allow system_app proc_pagetypeinfo:file read;
+allow system_app system_suspend_control_service:service_manager find;
+
+#============= system_server ==============
+allow system_server proc:file { getattr open read };
+
+#============= ueventd ==============
+allow ueventd persist_data_file:dir search;
+
+#============= vendor_init ==============
+allow vendor_init camera_data_file:dir { create setattr };
+allow vendor_init nfc_data_file:dir setattr;
+allow vendor_init system_data_file:dir { add_name create setattr write };
+
+#============= vndservicemanager ==============
+allow vndservicemanager init:binder transfer;
+
+#============= vold ==============
+allow vold hal_bootctl_hwservice:hwservice_manager find;
+allow vold persist_data_file:dir { ioctl open read };
+
+#============= webview_zygote ==============
+allow webview_zygote app_data_file:dir getattr;
+
+#============= cameraserver ==============
+allow cameraserver default_prop:property_service set;
+allow cameraserver vendor_data_file:sock_file write;
+
+#============= hal_audio_default ==============
+allow hal_audio_default vendor_data_file:file { append getattr open read };
+
+#============= hal_wifi_default ==============
+allow hal_wifi_default default_prop:property_service set;
+
+#============= rild ==============
+allow rild vendor_data_file:dir { add_name open read remove_name write };
+allow rild vendor_data_file:file { create getattr ioctl lock open read unlink write };

@@ -5,5 +5,5 @@ type sysfs_mdnie, fs_type, sysfs_type;
 type biometrics_data_file, file_type, data_file_type;
 type dsp_file, fs_type, contextmount_type;
 type sysfs_sec, fs_type, sysfs_type;
-type sysfs_camera, fs_type, sysfs_type;
+#type sysfs_camera, fs_type, sysfs_type;
 type battery_efs_file, file_type;

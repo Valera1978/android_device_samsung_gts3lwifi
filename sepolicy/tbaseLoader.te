@@ -1,4 +1,0 @@
-allow tbaseLoader ion_device:chr_file { ioctl open read };
-allow tbaseLoader system_prop:property_service set;
-allow tbaseLoader init:unix_stream_socket connectto;
-allow tbaseLoader property_socket:sock_file write;
