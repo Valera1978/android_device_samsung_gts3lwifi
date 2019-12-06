@@ -44,6 +44,9 @@ ro.qualcomm.bluetooth.map=true
 persist.camera.gyro.disable=0
 persist.camera.imglib.fddsp=0
 
+# Codec2 switch
+debug.media.codec2=2
+
 # CNE
 #persist.vendor.cne.feature=0
 
@@ -63,9 +66,6 @@ ro.qcom.ad=1
 
 # DRM
 drm.service.enabled=true
-
-#property to enable fingerprint
-persist.qfp=false
 
 # Graphics
 debug.egl.hw=1
