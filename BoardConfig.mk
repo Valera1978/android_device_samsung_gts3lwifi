@@ -158,12 +158,6 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/configs/vendor_fram
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/compatibility_matrix.xml
 
-# LineageHW
-BOARD_HARDWARE_CLASS += hardware/lineage/lineagehw
-
-# Lineage Hardware
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 79691776
 BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
